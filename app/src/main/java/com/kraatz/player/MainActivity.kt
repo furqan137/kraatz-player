@@ -13,6 +13,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.core.content.ContextCompat
 // import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.session.MediaController
@@ -20,6 +23,7 @@ import androidx.media3.session.SessionToken
 import com.google.common.util.concurrent.ListenableFuture
 import com.kraatz.player.service.SimpleMusicService
 import com.kraatz.player.ui.screens.SimpleMainScreen
+import com.kraatz.player.ui.screens.MusicLibraryScreen
 import com.kraatz.player.ui.theme.KraatzPlayerTheme
 // import dagger.hilt.android.AndroidEntryPoint
 
@@ -64,7 +68,27 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SimpleMainScreen()
+                    val navController = rememberNavController()
+                    
+                    NavHost(
+                        navController = navController,
+                        startDestination = "main"
+                    ) {
+                        composable("main") {
+                            SimpleMainScreen(
+                                onStartListeningClick = {
+                                    navController.navigate("music_library")
+                                }
+                            )
+                        }
+                        composable("music_library") {
+                            MusicLibraryScreen(
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }

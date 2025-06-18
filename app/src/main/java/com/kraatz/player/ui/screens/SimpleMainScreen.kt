@@ -11,7 +11,9 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SimpleMainScreen() {
+fun SimpleMainScreen(
+    onStartListeningClick: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -63,7 +65,7 @@ fun SimpleMainScreen() {
         Spacer(modifier = Modifier.height(32.dp))
         
         Button(
-            onClick = { /* TODO: Navigate to music library */ },
+            onClick = onStartListeningClick,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Start Listening")
