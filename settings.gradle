@@ -1,0 +1,3 @@
+rootProject.name = "Kraatz Player"
+include ':app'
+
