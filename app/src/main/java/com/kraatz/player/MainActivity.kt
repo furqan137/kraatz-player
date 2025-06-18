@@ -35,7 +35,21 @@ class MainActivity : ComponentActivity() {
         val allGranted = permissions.values.all { it }
         if (allGranted) {
             // Permissions granted, proceed with music scanning
+            onPermissionsGranted()
+        } else {
+            // Handle permission denial gracefully
+            onPermissionsDenied()
         }
+    }
+    
+    private fun onPermissionsGranted() {
+        // Initialize media functionality when permissions are granted
+        // This can be expanded later for music library scanning
+    }
+    
+    private fun onPermissionsDenied() {
+        // App can still function with limited features
+        // Show user a message about limited functionality if needed
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,15 +91,33 @@ class MainActivity : ComponentActivity() {
     }
     
     private fun initializeMediaController() {
-        val sessionToken = SessionToken(this, ComponentName(this, SimpleMusicService::class.java))
-        controllerFuture = MediaController.Builder(this, sessionToken).buildAsync()
-        controllerFuture.addListener({
-            mediaController = controllerFuture.get()
-        }, ContextCompat.getMainExecutor(this))
+        try {
+            val sessionToken = SessionToken(this, ComponentName(this, SimpleMusicService::class.java))
+            controllerFuture = MediaController.Builder(this, sessionToken).buildAsync()
+            controllerFuture.addListener({
+                try {
+                    mediaController = controllerFuture.get()
+                    // Successfully connected to media service
+                } catch (e: Exception) {
+                    // Handle connection failure gracefully
+                    e.printStackTrace()
+                    mediaController = null
+                }
+            }, ContextCompat.getMainExecutor(this))
+        } catch (e: Exception) {
+            // Handle initialization failure gracefully
+            e.printStackTrace()
+        }
     }
     
     override fun onDestroy() {
-        MediaController.releaseFuture(controllerFuture)
+        try {
+            if (::controllerFuture.isInitialized) {
+                MediaController.releaseFuture(controllerFuture)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         super.onDestroy()
     }
 }
