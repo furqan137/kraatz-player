@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
+INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
+INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
+INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
 MERGED from [com.google.accompanist:accompanist-permissions:0.30.1] /root/.gradle/caches/transforms-3/1d2e4c5900319243722ced7f785213ef/transformed/jetified-accompanist-permissions-0.30.1/AndroidManifest.xml:17:1-25:12
 MERGED from [io.coil-kt:coil-compose:2.4.0] /root/.gradle/caches/transforms-3/6c5824065442da322d852ccec76b6638/transformed/jetified-coil-compose-2.4.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.6.0] /root/.gradle/caches/transforms-3/aeb347180ece7381c70c61dc09819c41/transformed/navigation-common-2.6.0/AndroidManifest.xml:17:1-22:12
@@ -77,22 +77,22 @@ MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /root/.gradle/cac
 MERGED from [androidx.startup:startup-runtime:1.1.1] /root/.gradle/caches/transforms-3/0ccee948c0b3b2adcf6a193892947f3d/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.0.0] /root/.gradle/caches/transforms-3/d311093c955cf60ed9075fc4028f84d1/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.exifinterface:exifinterface:1.3.6] /root/.gradle/caches/transforms-3/8e0b037b213373e0281b2a9d5c525316/transformed/exifinterface-1.3.6/AndroidManifest.xml:17:1-24:12
-INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
+INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
+INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
 	package
 		INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
 		INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
 		INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-43:12
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:1-45:12
 		INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:2:11-69
@@ -116,8 +116,16 @@ uses-permission#android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
 ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:9:5-92
 	android:name
 		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:9:22-89
+uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:10:5-80
+	android:name
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:10:22-77
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:11:5-71
+	android:name
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:11:22-68
 application
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:11:5-42:19
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:13:5-44:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.4.3] /root/.gradle/caches/transforms-3/f576b5a1d50e03f04c82569d02798c52/transformed/jetified-ui-test-manifest-1.4.3/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.4.3] /root/.gradle/caches/transforms-3/f576b5a1d50e03f04c82569d02798c52/transformed/jetified-ui-test-manifest-1.4.3/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling:1.4.3] /root/.gradle/caches/transforms-3/0313120f55641558edfebb8a9316c43d/transformed/jetified-ui-tooling-1.4.3/AndroidManifest.xml:22:5-26:19
@@ -137,59 +145,59 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /root/.gradle/caches/transf
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.10.1] /root/.gradle/caches/transforms-3/6fe3e64a80094b4316c7006f0bcdcf47/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:19:9-35
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:21:9-35
 	android:label
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:17:9-41
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:19:9-41
 	android:fullBackupContent
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:15:9-54
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:17:9-54
 	android:roundIcon
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:18:9-54
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:20:9-54
 	tools:targetApi
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:21:9-29
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:23:9-29
 	android:icon
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:16:9-43
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:18:9-43
 	android:allowBackup
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:13:9-35
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:15:9-35
 	android:theme
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:20:9-50
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:22:9-50
 	android:dataExtractionRules
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:14:9-65
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:16:9-65
 	android:name
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:12:9-48
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:14:9-48
 activity#com.kraatz.player.MainActivity
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:23:9-32:20
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:25:9-34:20
 	android:label
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:26:13-45
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:28:13-45
 	android:exported
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:25:13-36
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:27:13-36
 	android:theme
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:27:13-54
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:29:13-54
 	android:name
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:24:13-41
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:26:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:28:13-31:29
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:30:13-33:29
 action#android.intent.action.MAIN
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:29:17-69
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:31:17-69
 	android:name
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:29:25-66
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:30:17-77
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:32:17-77
 	android:name
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:30:27-74
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:32:27-74
 service#com.kraatz.player.service.SimpleMusicService
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:34:9-41:19
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:36:9-43:19
 	android:exported
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:36:13-37
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:38:13-37
 	android:foregroundServiceType
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:37:13-58
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:39:13-58
 	android:name
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:35:13-55
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:37:13-55
 intent-filter#action:name:androidx.media3.session.MediaSessionService
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:38:13-40:29
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:40:13-42:29
 action#androidx.media3.session.MediaSessionService
-ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:39:17-86
+ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:41:17-86
 	android:name
-		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:39:25-83
+		ADDED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml:41:25-83
 uses-sdk
 INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /tmp/maxregnerisch/kraatz-player/app/src/main/AndroidManifest.xml

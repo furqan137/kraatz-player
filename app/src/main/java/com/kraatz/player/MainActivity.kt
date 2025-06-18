@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -24,7 +25,11 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.kraatz.player.service.SimpleMusicService
 import com.kraatz.player.ui.screens.SimpleMainScreen
 import com.kraatz.player.ui.screens.MusicLibraryScreen
+import com.kraatz.player.ui.screens.PlayerScreen
+import com.kraatz.player.ui.screens.EqualizerScreen
 import com.kraatz.player.ui.theme.KraatzPlayerTheme
+import com.kraatz.player.ui.viewmodel.MusicPlayerViewModel
+import com.kraatz.player.ui.viewmodel.MusicPlayerViewModelFactory
 // import dagger.hilt.android.AndroidEntryPoint
 
 // @AndroidEntryPoint - Temporarily disabled
@@ -70,6 +75,21 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     
+                    // Initialize ViewModel
+                    val viewModel: MusicPlayerViewModel = viewModel(
+                        factory = MusicPlayerViewModelFactory(this@MainActivity)
+                    )
+                    
+                    // Collect states
+                    val songs by viewModel.songs.collectAsState()
+                    val isLoadingMusic by viewModel.isLoadingMusic.collectAsState()
+                    val playbackState by viewModel.playbackState.collectAsState()
+                    val equalizerEnabled by viewModel.equalizerEnabled.collectAsState()
+                    val currentPreset by viewModel.currentPreset.collectAsState()
+                    val bandLevels by viewModel.bandLevels.collectAsState()
+                    val bassBoostStrength by viewModel.bassBoostStrength.collectAsState()
+                    val virtualizerStrength by viewModel.virtualizerStrength.collectAsState()
+                    
                     NavHost(
                         navController = navController,
                         startDestination = "main"
@@ -83,6 +103,53 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("music_library") {
                             MusicLibraryScreen(
+                                songs = songs,
+                                isLoading = isLoadingMusic,
+                                onSongClick = { song ->
+                                    viewModel.playSong(song)
+                                    navController.navigate("player")
+                                },
+                                onPlayAllClick = {
+                                    viewModel.playAllSongs()
+                                    navController.navigate("player")
+                                },
+                                onEqualizerClick = {
+                                    navController.navigate("equalizer")
+                                },
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                        composable("player") {
+                            PlayerScreen(
+                                playbackState = playbackState,
+                                onPlayPause = { viewModel.playPause() },
+                                onNext = { viewModel.skipToNext() },
+                                onPrevious = { viewModel.skipToPrevious() },
+                                onSeek = { position -> viewModel.seekTo(position) },
+                                onRepeatModeChange = { mode -> viewModel.setRepeatMode(mode) },
+                                onShuffleModeChange = { enabled -> viewModel.setShuffleMode(enabled) },
+                                onEqualizerClick = {
+                                    navController.navigate("equalizer")
+                                },
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                        composable("equalizer") {
+                            EqualizerScreen(
+                                isEnabled = equalizerEnabled,
+                                currentPreset = currentPreset,
+                                bandLevels = bandLevels,
+                                bassBoostStrength = bassBoostStrength,
+                                virtualizerStrength = virtualizerStrength,
+                                onEnabledChange = { enabled -> viewModel.setEqualizerEnabled(enabled) },
+                                onPresetChange = { preset -> viewModel.applyEqualizerPreset(preset) },
+                                onBandLevelChange = { band, level -> viewModel.setBandLevel(band, level) },
+                                onBassBoostChange = { strength -> viewModel.setBassBoost(strength) },
+                                onVirtualizerChange = { strength -> viewModel.setVirtualizer(strength) },
                                 onBackClick = {
                                     navController.popBackStack()
                                 }
