@@ -35,6 +35,7 @@ fun PlayerScreen(
     onShuffleModeChange: (Boolean) -> Unit,
     onEqualizerClick: () -> Unit,
     onBackClick: () -> Unit,
+    onShareNowPlaying: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     var sliderPosition by remember { mutableStateOf(0f) }
@@ -78,6 +79,12 @@ fun PlayerScreen(
                 }
             },
             actions = {
+                // Share now playing button
+                if (onShareNowPlaying != null) {
+                    IconButton(onClick = onShareNowPlaying) {
+                        Icon(Icons.Default.Share, contentDescription = "Share Now Playing")
+                    }
+                }
                 IconButton(onClick = onEqualizerClick) {
                     Icon(Icons.Default.Settings, contentDescription = "Equalizer")
                 }

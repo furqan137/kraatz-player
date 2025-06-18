@@ -2,6 +2,7 @@ package com.kraatz.player
 
 import android.Manifest
 import android.content.ComponentName
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -30,6 +31,9 @@ import com.kraatz.player.ui.screens.EqualizerScreen
 import com.kraatz.player.ui.theme.KraatzPlayerTheme
 import com.kraatz.player.ui.viewmodel.MusicPlayerViewModel
 import com.kraatz.player.ui.viewmodel.MusicPlayerViewModelFactory
+import com.kraatz.player.utils.PermissionManager
+import com.kraatz.player.utils.ShareManager
+import com.kraatz.player.utils.FileManager
 // import dagger.hilt.android.AndroidEntryPoint
 
 // @AndroidEntryPoint - Temporarily disabled
@@ -37,6 +41,11 @@ class MainActivity : ComponentActivity() {
     
     private lateinit var controllerFuture: ListenableFuture<MediaController>
     private var mediaController: MediaController? = null
+    
+    // Permission and sharing managers
+    private lateinit var permissionManager: PermissionManager
+    private lateinit var shareManager: ShareManager
+    private lateinit var fileManager: FileManager
     
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -63,6 +72,14 @@ class MainActivity : ComponentActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Initialize managers
+        permissionManager = PermissionManager(this)
+        shareManager = ShareManager(this)
+        fileManager = FileManager(this)
+        
+        // Handle shared files if app was opened via sharing
+        handleSharedFiles(intent)
         
         checkAndRequestPermissions()
         initializeMediaController()
@@ -118,6 +135,26 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onBackClick = {
                                     navController.popBackStack()
+                                },
+                                onShareSong = { song ->
+                                    // Convert Song to File for sharing
+                                    // This is a simplified approach - in a real app you'd need proper file handling
+                                    try {
+                                        shareManager.shareNowPlaying(
+                                            songTitle = song.title,
+                                            artist = song.artist,
+                                            album = song.album
+                                        )
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                    }
+                                },
+                                onSharePlaylist = {
+                                    try {
+                                        shareManager.sharePlaylist("My Playlist", emptyList()) // TODO: Convert songs to files
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                    }
                                 }
                             )
                         }
@@ -135,6 +172,22 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onBackClick = {
                                     navController.popBackStack()
+                                },
+                                onShareNowPlaying = {
+                                    try {
+                                        val currentSong = playbackState.currentSong
+                                        if (currentSong != null) {
+                                            shareManager.shareNowPlaying(
+                                                songTitle = currentSong.title,
+                                                artist = currentSong.artist,
+                                                album = currentSong.album
+                                            )
+                                        } else {
+                                            shareManager.shareApp()
+                                        }
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                    }
                                 }
                             )
                         }
@@ -162,23 +215,40 @@ class MainActivity : ComponentActivity() {
     }
     
     private fun checkAndRequestPermissions() {
-        val permissions = mutableListOf<String>()
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO) 
-                != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.READ_MEDIA_AUDIO)
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) 
-                != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+        // Use the new PermissionManager for comprehensive permission handling
+        permissionManager.requestStoragePermissions { granted ->
+            if (granted) {
+                onPermissionsGranted()
+            } else {
+                onPermissionsDenied()
             }
         }
+    }
+    
+    /**
+     * Handle files shared with the app
+     */
+    private fun handleSharedFiles(intent: Intent?) {
+        if (intent == null) return
         
-        if (permissions.isNotEmpty()) {
-            requestPermissionLauncher.launch(permissions.toTypedArray())
+        try {
+            val sharedFiles = shareManager.handleSharedFiles(intent)
+            if (sharedFiles.isNotEmpty()) {
+                // TODO: Add shared files to the music library or play them directly
+                // For now, we'll just log that files were received
+                println("Received ${sharedFiles.size} shared audio files")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+    }
+    
+    /**
+     * Handle new intents (when app is already running)
+     */
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        handleSharedFiles(intent)
     }
     
     private fun initializeMediaController() {

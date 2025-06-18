@@ -29,7 +29,9 @@ fun MusicLibraryScreen(
     onSongClick: (Song) -> Unit,
     onPlayAllClick: () -> Unit,
     onEqualizerClick: () -> Unit,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = {},
+    onShareSong: ((Song) -> Unit)? = null,
+    onSharePlaylist: (() -> Unit)? = null
 ) {
     Column(
         modifier = Modifier
@@ -52,6 +54,12 @@ fun MusicLibraryScreen(
                 }
             },
             actions = {
+                // Share playlist button
+                if (songs.isNotEmpty() && onSharePlaylist != null) {
+                    IconButton(onClick = onSharePlaylist) {
+                        Icon(Icons.Default.Share, contentDescription = "Share Playlist")
+                    }
+                }
                 IconButton(onClick = onEqualizerClick) {
                     Icon(Icons.Default.Settings, contentDescription = "Equalizer")
                 }
@@ -185,7 +193,10 @@ fun MusicLibraryScreen(
             items(songs) { song ->
                 RealSongItem(
                     song = song,
-                    onSongClick = { onSongClick(song) }
+                    onSongClick = { onSongClick(song) },
+                    onShareClick = if (onShareSong != null) {
+                        { onShareSong(song) }
+                    } else null
                 )
             }
             
@@ -287,7 +298,8 @@ fun MusicLibraryScreen(
 @Composable
 private fun RealSongItem(
     song: Song,
-    onSongClick: () -> Unit
+    onSongClick: () -> Unit,
+    onShareClick: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier
@@ -359,6 +371,18 @@ private fun RealSongItem(
                         text = " • ${song.getDurationString()}",
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                    )
+                }
+            }
+            
+            // Share button (if sharing is enabled)
+            if (onShareClick != null) {
+                IconButton(onClick = onShareClick) {
+                    Icon(
+                        Icons.Default.Share,
+                        contentDescription = "Share",
+                        tint = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }
