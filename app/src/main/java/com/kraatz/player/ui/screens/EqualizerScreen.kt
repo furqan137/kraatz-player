@@ -27,6 +27,16 @@ data class EqualizerPreset(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EqualizerScreen(
+    isEnabled: Boolean = false,
+    currentPreset: com.kraatz.player.equalizer.KraatzPreset = com.kraatz.player.equalizer.KraatzPreset.NORMAL,
+    bandLevels: List<Short> = emptyList(),
+    bassBoostStrength: Int = 0,
+    virtualizerStrength: Int = 0,
+    onEnabledChange: (Boolean) -> Unit = {},
+    onPresetChange: (com.kraatz.player.equalizer.KraatzPreset) -> Unit = {},
+    onBandLevelChange: (Int, Short) -> Unit = { _, _ -> },
+    onBassBoostChange: (Int) -> Unit = {},
+    onVirtualizerChange: (Int) -> Unit = {},
     onBackClick: () -> Unit = {}
 ) {
     // Equalizer state
@@ -309,4 +319,3 @@ private fun EqualizerBandSlider(
         )
     }
 }
-
